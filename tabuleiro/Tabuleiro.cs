@@ -31,13 +31,17 @@ namespace tabuleiro
 
         public void ColocarPeca(Peca p, Posicao pos) 
         {
+            if (ExistePeca(pos)) 
+            {
+                throw new TabuleiroException("Já existe uma peça nessa posição");
+            }
             Pecas[pos.Linha, pos.Coluna] = p;
             p.Posicao = pos;
         }
 
         public bool PosicaoValida( Posicao pos) 
         {
-            if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna <= 0 || pos.Coluna >= Colunas) 
+            if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas) 
             {
                 return false;
             }
